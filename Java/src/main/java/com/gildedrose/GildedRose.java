@@ -13,14 +13,20 @@ class GildedRose {
 
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
-            if (!items[i].name.equals(AGED_BRIE) && !items[i].name.equals(BACKSTAGE_PASSES)) {
-                if (items[i].quality > 0) {
-                    if (!items[i].name.equals(SULFURAS)) {
+            Item currentItem = items[i];
+
+            String itemName = getItemName(currentItem);
+            int itemQuality = getItemQuality(currentItem);
+            int itemSellIn = getItemSellIn(currentItem);
+
+            if (!itemName.equals(AGED_BRIE) && !itemName.equals(BACKSTAGE_PASSES)) {
+                if (itemQuality > 0) {
+                    if (!itemName.equals(SULFURAS)) {
                         decreaseQuality(i);
                     }
                 }
             } else {
-                if (items[i].quality < 50) {
+                if (itemQuality < 50) {
                     increaseQuality(i);
                     increaseQualityForBackstagePasses(i);
                 }
@@ -28,16 +34,16 @@ class GildedRose {
 
             decreaseSellIn(i);
 
-            if (items[i].sellIn < 0) {
-                if (!items[i].name.equals(AGED_BRIE)) {
-                    if (!items[i].name.equals(BACKSTAGE_PASSES)) {
-                        if (items[i].quality > 0) {
-                            if (!items[i].name.equals(SULFURAS)) {
+            if (itemSellIn < 0) {
+                if (!itemName.equals(AGED_BRIE)) {
+                    if (!itemName.equals(BACKSTAGE_PASSES)) {
+                        if (itemQuality > 0) {
+                            if (!itemName.equals(SULFURAS)) {
                                 decreaseQuality(i);
                             }
                         }
                     } else {
-                        items[i].quality = items[i].quality - items[i].quality;
+                        items[i].quality = itemQuality - itemQuality;
                     }
                 } else {
                     increaseQualityIfNeeded(i);
@@ -78,5 +84,17 @@ class GildedRose {
         if (!items[index].name.equals(SULFURAS)) {
             items[index].sellIn = items[index].sellIn - 1;
         }
+    }
+
+    private String getItemName(Item item) {
+        return item.name;
+    }
+
+    private int getItemQuality(Item item) {
+        return item.quality;
+    }
+
+    private int getItemSellIn(Item item) {
+        return item.sellIn;
     }
 }
