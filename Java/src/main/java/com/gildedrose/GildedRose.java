@@ -1,6 +1,10 @@
 package com.gildedrose;
 
 class GildedRose {
+    private static final String AGED_BRIE = "Aged Brie";
+    private static final String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
+    private static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
+
     Item[] items;
 
     public GildedRose(Item[] items) {
@@ -9,9 +13,9 @@ class GildedRose {
 
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
-            if (!items[i].name.equals("Aged Brie") && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+            if (!items[i].name.equals(AGED_BRIE) && !items[i].name.equals(BACKSTAGE_PASSES)) {
                 if (items[i].quality > 0) {
-                    if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
+                    if (!items[i].name.equals(SULFURAS)) {
                         decreaseQuality(i);
                     }
                 }
@@ -25,10 +29,10 @@ class GildedRose {
             decreaseSellIn(i);
 
             if (items[i].sellIn < 0) {
-                if (!items[i].name.equals("Aged Brie")) {
-                    if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                if (!items[i].name.equals(AGED_BRIE)) {
+                    if (!items[i].name.equals(BACKSTAGE_PASSES)) {
                         if (items[i].quality > 0) {
-                            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
+                            if (!items[i].name.equals(SULFURAS)) {
                                 decreaseQuality(i);
                             }
                         }
@@ -45,7 +49,7 @@ class GildedRose {
     // helper methods
 
     private void increaseQualityForBackstagePasses(int indexOfItem) {
-        if (items[indexOfItem].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+        if (items[indexOfItem].name.equals(BACKSTAGE_PASSES)) {
             if (items[indexOfItem].sellIn < 11) {
                 increaseQualityIfNeeded(indexOfItem);
             }
@@ -71,7 +75,7 @@ class GildedRose {
     }
 
     private void decreaseSellIn(int index) {
-        if (!items[index].name.equals("Sulfuras, Hand of Ragnaros")) {
+        if (!items[index].name.equals(SULFURAS)) {
             items[index].sellIn = items[index].sellIn - 1;
         }
     }
