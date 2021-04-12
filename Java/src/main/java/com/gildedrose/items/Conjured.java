@@ -12,13 +12,13 @@ public class Conjured {
         int quality = itemToUpdate.quality;
         int sellIn = itemToUpdate.sellIn;
 
-        if (quality < GildedRoseConstants.MAX_QUALITY) {
+        if (quality > 0) {
             quality = quality - 2;
         }
 
         sellIn = sellIn - 1;
 
-        if (sellIn < 0 && quality < GildedRoseConstants.MAX_QUALITY) {
+        if (sellIn < 0 && quality > 0) {
             quality = quality - 2;
         }
 
